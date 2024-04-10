@@ -1,7 +1,7 @@
 import json
 
 # Load WLASL dataset
-with open('/content/WLASL/start_kit/WLASL_v0.3.json') as f:
+with open('WLASL_v0.3.json') as f:
     wlasl_data = json.load(f)
 
 # Transform WLASL data into video chat instruction data format
@@ -11,11 +11,11 @@ for entry in wlasl_data:
     for instance in entry['instances']:
         # Construct the video file path (assuming direct mapping is possible)
         # You might need to adjust this part based on how your videos are stored
-        video_path = f"{instance['video_id']}/{instance['url'].split('/')[-1]}"
+        video_path = f"videos/{instance['video_id']}.mp4"
 
         # Construct the QA pair
         qa_pair = {
-            "q": "What is the sign language in this video?",
+            "q": "What is the sign language word in this video?",
             "a": gloss
         }
 
@@ -26,7 +26,7 @@ for entry in wlasl_data:
         })
 
 # Assuming you want to save this to a file
-with open('/content/instruction_data.json', 'w') as outfile:
+with open('instruction_data.json', 'w') as outfile:
     json.dump(instruction_data, outfile, indent=4)
 
 print("Instruction data JSON created successfully.")

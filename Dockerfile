@@ -12,7 +12,8 @@ WORKDIR /work
 
 COPY requirements.txt /work/
 COPY redo_json.py /work/
-COPY videos/ /work/
+COPY videos/ /work/videos/
+COPY WLASL_v0.3.json /work/
 
 ENV FORCE_CUDA="1"
 ENV TORCH_CUDA_ARCH_LIST="Kepler;Kepler+Tesla;Maxwell;Maxwell+Tegra;Pascal;Volta;Turing"

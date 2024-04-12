@@ -1,26 +1,33 @@
-#FROM nvcr.io/nvidia/pytorch:22.03-py3
-FROM nvcr.io/nvidia/pytorch:21.08-py3
+# Start from a PyTorch base image with CUDA 11.4 support
+FROM pytorch/pytorch:1.13.1-cuda11.4-cudnn8-runtime
 
-# Install miniconda ----------------
-ENV PATH="/root/miniconda3/bin:${PATH}"
-ARG PATH="/root/miniconda3/bin:${PATH}"
-ARG DEBIAN_FRONTEND=noninteractive
+# Update and install necessary packages
+RUN apt-get update && apt-get install -y \
+    git \
+    wget
 
-RUN apt-get update && apt-get install -y python3.8 pip wget
-RUN apt-get update && apt-get install -y git
-
+# Set the working directory
 WORKDIR /work
 
-COPY requirements.txt /work/
-COPY redo_json.py /work/
+# Copy your files into the container
+COPY requirements.txt redo_json.py WLASL_v0.3.json /work/
 COPY videos/ /work/videos/
-COPY WLASL_v0.3.json /work/
 
+# Set environment variables for CUDA
 ENV FORCE_CUDA="1"
-ENV TORCH_CUDA_ARCH_LIST="Kepler;Kepler+Tesla;Maxwell;Maxwell+Tegra;Pascal;Volta;Turing"
+ENV TORCH_CUDA_ARCH_LIST="Kepler;Kepler+Tegra;Maxwell;Maxwell+Tegra;Pascal;Volta;Turing"
 
+# Install PyTorch with CUDA 11.4
+RUN pip install torch==1.13.1+cu114 torchvision==0.14.1+cu114 torchaudio==0.13.1+cu114 -f https://download.pytorch.org/whl/torch_stable.html
+
+# Install other dependencies from requirements.txt
 RUN pip install -r /work/requirements.txt
-RUN git clone https://github.com/NExT-GPT/NExT-GPT.git
+
+# Clone the necessary repository
+RUN git clone https://github.com/NExT-GPT/NExT-GPT.git /work/NExT-GPT
+
+# Install any additional requirements from the cloned repository
 RUN pip install -r /work/NExT-GPT/requirements.txt
 
-#ENTRYPOINT  ["python", "/work/sft_trainer.py"]
+# Default command for the container
+#CMD ["python", "/work/redo_json.py"]

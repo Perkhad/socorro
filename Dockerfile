@@ -18,8 +18,11 @@ COPY videos/ /work/videos/
 ENV FORCE_CUDA="1"
 ENV TORCH_CUDA_ARCH_LIST="Kepler;Kepler+Tegra;Maxwell;Maxwell+Tegra;Pascal;Volta;Turing"
 
-# Install PyTorch with CUDA 11.4
-RUN pip install torch==1.13.1+cu114 torchvision==0.14.1+cu114 torchaudio==0.13.1+cu114 -f https://download.pytorch.org/whl/torch_stable.html
+# Install PyTorch, TorchVision, and Torchaudio with CUDA 11.6
+RUN pip install \
+    https://download.pytorch.org/whl/cu116/torch-1.13.1%2Bcu116-cp36-cp36m-linux_x86_64.whl \
+    https://download.pytorch.org/whl/cu116/torchvision-0.14.1%2Bcu116-cp36-cp36m-linux_x86_64.whl \
+    https://download.pytorch.org/whl/cu116/torchaudio-0.13.1%2Bcu116-cp36-cp36m-linux_x86_64.whl
 
 # Install other dependencies from requirements.txt
 RUN pip install -r /work/requirements.txt

@@ -1,5 +1,6 @@
 # Start from a PyTorch base image with CUDA 11.4 support
-FROM pytorch/pytorch:1.13.1-cuda11.6-cudnn8-devel
+#FROM pytorch/pytorch:1.13.1-cuda11.6-cudnn8-devel
+FROM nvcr.io/nvidia/pytorch:22.08-py3
 
 # Update and install necessary packages
 RUN apt-get update && apt-get install -y \

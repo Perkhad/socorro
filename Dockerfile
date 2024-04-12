@@ -31,4 +31,4 @@ ENV TORCH_CUDA_ARCH_LIST="Kepler;Kepler+Tegra;Maxwell;Maxwell+Tegra;Pascal;Volta
 RUN git clone https://github.com/NExT-GPT/NExT-GPT.git /work/NExT-GPT
 
 # Install any additional requirements from the cloned repository
-RUN pip install -r /work/NExT-GPT/requirements.txt
+#RUN pip install -r /work/NExT-GPT/requirements.txt

@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /work
 
 # Copy your files into the container
-COPY requirements.txt redo_json.py WLASL_v0.3.json /work/
+COPY redo_json.py WLASL_v0.3.json /work/
 COPY videos/ /work/videos/
 
 # Set environment variables for CUDA
@@ -23,7 +23,7 @@ ENV TORCH_CUDA_ARCH_LIST="Kepler;Kepler+Tegra;Maxwell;Maxwell+Tegra;Pascal;Volta
 
 
 # Install other dependencies from requirements.txt
-RUN pip install -r /work/requirements.txt
+#RUN pip install -r /work/requirements.txt
 
 # Clone the necessary repository
 RUN git clone https://github.com/NExT-GPT/NExT-GPT.git /work/NExT-GPT

@@ -19,16 +19,18 @@ RUN git lfs install
 # Set the working directory
 WORKDIR /work
 
-# Copy your files into the container
-COPY redo_json.py WLASL_v0.3.json /work/
-COPY videos/ /work/videos/
-
 # Set environment variables for CUDA
 ENV FORCE_CUDA="1"
 ENV TORCH_CUDA_ARCH_LIST="Kepler;Kepler+Tegra;Maxwell;Maxwell+Tegra;Pascal;Volta;Turing"
 
 # Clone the necessary repository
 RUN git clone https://github.com/NExT-GPT/NExT-GPT.git /work/NExT-GPT
+
+# Copy your files into the container
+COPY redo_json.py WLASL_v0.3.json /work/NExT-GPT/data/IT_data/T+X-T_data/videochat/
+COPY videos/ /work/NExT-GPT/data/IT_data/T+X-T_data/videochat/
+# Adapt dataset JSON file
+RUN python redo_json.py
 
 # Download the Vicuna13b weights
 RUN git clone https://huggingface.co/helloollel/vicuna-13b /work/NExT-GPT/ckpt/pretrained_ckpt/vicuna_ckpt

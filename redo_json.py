@@ -1,7 +1,7 @@
 import json
 
 # Load WLASL dataset
-with open('WLASL_v0.3.json') as f:
+with open('/work/NExT-GPT/data/IT_data/T+X-T_data/videochat/WLASL_v0.3.json') as f:
     wlasl_data = json.load(f)
 
 # Transform WLASL data into video chat instruction data format
@@ -26,7 +26,7 @@ for entry in wlasl_data:
         })
 
 # Assuming you want to save this to a file
-with open('instruction_data.json', 'w') as outfile:
+with open('/work/NExT-GPT/data/IT_data/T+X-T_data/videochat/videochat_instruct.json', 'w') as outfile:
     json.dump(instruction_data, outfile, indent=4)
 
 print("Instruction data JSON created successfully.")

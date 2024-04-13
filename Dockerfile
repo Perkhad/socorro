@@ -30,7 +30,7 @@ RUN git clone https://github.com/NExT-GPT/NExT-GPT.git /work/NExT-GPT
 COPY redo_json.py WLASL_v0.3.json /work/NExT-GPT/data/IT_data/T+X-T_data/videochat/
 COPY videos/ /work/NExT-GPT/data/IT_data/T+X-T_data/videochat/
 # Adapt dataset JSON file
-RUN python redo_json.py
+RUN python /work/NExT-GPT/data/IT_data/T+X-T_data/videochat/redo_json.py
 
 # Download the Vicuna13b weights
 RUN git clone https://huggingface.co/helloollel/vicuna-13b /work/NExT-GPT/ckpt/pretrained_ckpt/vicuna_ckpt

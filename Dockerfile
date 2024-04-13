@@ -33,6 +33,7 @@ COPY videos/ /work/NExT-GPT/data/IT_data/T+X-T_data/videochat/
 RUN python /work/NExT-GPT/data/IT_data/T+X-T_data/videochat/redo_json.py
 
 # Download the Vicuna13b weights
+RUN rm -rf /work/NExT-GPT/ckpt/pretrained_ckpt/vicuna_ckpt
 RUN git clone https://huggingface.co/helloollel/vicuna-13b /work/NExT-GPT/ckpt/pretrained_ckpt/vicuna_ckpt
 
 # Download the ImageBind weights
